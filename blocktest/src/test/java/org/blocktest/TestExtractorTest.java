@@ -42,11 +42,7 @@ public class TestExtractorTest extends AstTestSupport {
       throws Exception {
     sourceFixture(fixture, INPUT);
 
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                  "Sample", 
-                                                   coverage, 
-                                                   rewrite, 
-                                                   compile);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", coverage, rewrite, compile);
 
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToSameClass(output().toString(), "Sample", duplicates);
@@ -227,19 +223,14 @@ public class TestExtractorTest extends AstTestSupport {
     Path original = temporary.getRoot().toPath().resolve("Sample.java");
     Path output = temporary.getRoot().toPath().resolve("out.java");
     
-    TestExtractor testExtractor = new TestExtractor(original + ".missing", 
-                                    "Sample", 
-                                           false,
-                                            false, 
-                                            true);
+    TestExtractor testExtractor = new TestExtractor(original + ".missing", "Sample", false, false, true);
 
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToSameClass(output().toString(), "Out", 0);
     
     assertFalse(Files.exists(output));
     for (String destination : Arrays.asList(null, "")) {
-      TestExtractor te = new TestExtractor(original.toString(), "Sample", 
-                                true, true, true);
+      TestExtractor te = new TestExtractor(original.toString(), "Sample", true, true, true);
 
       te.extractBlockTests();
       te.extractTestsToSameClass(destination, "Out", 0);
@@ -285,12 +276,8 @@ public class TestExtractorTest extends AstTestSupport {
     ByteArrayOutputStream errors = new ByteArrayOutputStream();
     try (PrintStream captured = new PrintStream(errors, true, "UTF-8")) {
       System.setErr(captured);
-      TestExtractor testExtractor = new TestExtractor(original.toString(), 
-                                     "Sample", 
-                                            false, 
-                                             false, 
-                                             true);
-
+      TestExtractor testExtractor = new TestExtractor(original.toString(), "Sample", false, false, true);
+      
       testExtractor.extractBlockTests();
       testExtractor.extractTestsToSameClass(output.toString(), "Sample", 0);
     } finally {
@@ -315,11 +302,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "  }\n"
             + "}\n");
 
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                   "Sample", 
-                                          false, 
-                                           false, 
-                                           true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, false, true);
+    
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToSameClass(output().toString(), "Sample", 0);
 
@@ -346,11 +330,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "  }\n"
             + "}\n");
 
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                    "Sample",
-                                           false,
-                                            false,
-                                            true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, false, true);
+    
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToSameClass(output().toString(), "Sample", 0);
 
@@ -374,11 +355,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "}\n";
     source(INPUT, source);
 
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                   "Sample", 
-                                          false, 
-                                           true, 
-                                           true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, true, true);
+    
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToNewClasses(output().toString(), "Sample", 0);
 
@@ -413,11 +391,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "  }\n"
             + "}\n";
     source(INPUT, source);
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                    "Sample", 
-                                           true, 
-                                            false, 
-                                            true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", true, false, true);
+    
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToNewClasses(output().toString(), "Sample", 0);
 
@@ -451,11 +426,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "}\n";
     source(INPUT, source);
     String original = new String(Files.readAllBytes(input()), StandardCharsets.UTF_8);
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                    "Sample", 
-                                           false,
-                                            false, 
-                                            true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, false, true);
+    
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToNewClasses(null, "Sample", 0);
 
@@ -481,11 +453,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "  }\n"
             + "}\n";
     source(INPUT, source);
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                   "Sample", 
-                                          false, 
-                                           false, 
-                                           true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, false, true);
+    
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToNewClasses(output().toString(), "Sample", 0);
 
@@ -522,11 +491,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "}\n";
     source(INPUT, source);
     Util.junitVersion = "junit4";
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                   "Sample", 
-                                          false, 
-                                           true, 
-                                           true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, true, true);
+    
     testExtractor.extractBlockTests();
     testExtractor.extractTestsToNewClasses(output().toString(), "Sample", 2);
 
@@ -556,11 +522,7 @@ public class TestExtractorTest extends AstTestSupport {
             + "  }\n"
             + "}\n";
     source(INPUT, source);
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                   "Sample", 
-                                          false, 
-                                           false,
-                                           true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, false, true);
 
     testExtractor.extractBlockTests();
     assertEquals(2, testExtractor.blockTests.size());
@@ -595,11 +557,8 @@ public class TestExtractorTest extends AstTestSupport {
             + "  }\n"
             + "}\n";
     source(INPUT, sourceWithoutConfig);
-    TestExtractor testExtractor = new TestExtractor(input().toString(), 
-                                    "Sample", 
-                                            false, 
-                                             false, 
-                                             true);
+    TestExtractor testExtractor = new TestExtractor(input().toString(), "Sample", false, false, true);
+    
     testExtractor.extractBlockTests();
     IllegalStateException missingConfig =
         assertThrows(IllegalStateException.class, testExtractor::applyBlockTestConfigs);
@@ -629,11 +588,7 @@ public class TestExtractorTest extends AstTestSupport {
   @Test
   public void configExtractionInitializesMissingMapAndRejectsInvalidConfigBlocks() throws Exception {
     TestExtractor testExtractor =
-        new TestExtractor(input().toString(), 
-          "Sample", 
-                 false, 
-                  false, 
-                  true);
+        new TestExtractor(input().toString(), "Sample", false, false, true);
 
     testExtractor.blockTestConfigs = null;
     testExtractor.extractBlockTestConfigs();
